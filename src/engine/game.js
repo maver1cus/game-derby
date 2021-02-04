@@ -1,9 +1,6 @@
 export default class Game {
   constructor(config) {
-    this.config = config;
-  }
-  static create(config) {
-    return new Game(config);
+    this._config = config;
   }
 
   start() {
@@ -11,9 +8,10 @@ export default class Game {
   }
 
   gameStep() {
-    console.log(`game step:`, this.config);
+    console.log(`game step:`, this._config);
   }
 
+  static create(config) {
+    return new Game(config);
+  }
 };
-
-

@@ -1,6 +1,6 @@
-import Game from './src/components/game.js';
-import Car from './src/components/car.js';
-import Item from './src/components/item.js';
+import Game from './src/engine/game.js';
+import Car from './src/engine/car.js';
+import Item from './src/engine/item.js';
 
 const config = [
   new Car({
