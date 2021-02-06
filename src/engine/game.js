@@ -1,14 +1,24 @@
+import {getDirection} from "../utils.js";
+
 export default class Game {
   constructor(config) {
-    this._config = config;
+    this._cars = config.cars;
+    this._items = config.items;
+    this._universe = config.universe;
   }
 
   start() {
-    setInterval(this.gameStep.bind(this), 1000);
+    // setInterval(this.gameStep.bind(this), 1000);
+    for (let i = 0; i < 10; i++) {
+      this.gameStep();
+    }
   }
 
   gameStep() {
-    console.log(`game step:`, this._config);
+    const direction = getDirection();
+    this._cars.forEach(car => car.moving(direction, this._universe));
+
+    console.log(`game step:`, this._cars);
   }
 
   static create(config) {
