@@ -1,25 +1,20 @@
-import {getDirection} from "../utils.js";
+import World from './world.js';
 
 export default class Game {
   constructor(config) {
-    this._cars = config.cars;
-    this._items = config.items;
-    this._universe = config.universe;
+    this._world = World.create(config);
   }
 
   start() {
-    // setInterval(this.gameStep.bind(this), 1000);
-    for (let i = 0; i < 10; i++) {
-      this.gameStep();
-    }
+    setInterval(this.gameStep.bind(this), 1000);
   }
 
   gameStep() {
-    const direction = getDirection();
-    this._cars.forEach(car => car.moving(direction, this._universe));
+    this._world.render();
+    console.log(this._world);
 
-    console.log(`game step:`, this._cars);
   }
+
 
   static create(config) {
     return new Game(config);

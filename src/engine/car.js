@@ -1,32 +1,18 @@
+import {getDirection} from '../utils.js';
+
 export default class Car {
-  constructor(config) {
-    this._coords = config.coords;
-    this._life = config.life;
-    this._speed = config.speed;
+  constructor(speed, life, directionRide) {
+    this._life = life;
+    this._speed = speed;
+    this._directionRide = directionRide;
   }
 
-  moving(direction, universe) {
-    const coordsCandidate = {}
+  get speed() {
+    return this._speed;
+  }
 
-    switch (direction) {
-      case 'left':
-        coordsCandidate.x = this._coords.x - this._speed;
-        coordsCandidate.y = this._coords.y;
-        break;
-      case 'right':
-        coordsCandidate.x = this._coords.x + this._speed;
-        coordsCandidate.y = this._coords.y;
-        break;
-      case 'top':
-        coordsCandidate.x = this._coords.x;
-        coordsCandidate.y = this._coords.y - this._speed;
-        break;
-      case 'bottom':
-        coordsCandidate.x = this._coords.x;
-        coordsCandidate.y = this._coords.y + this._speed;
-        break;
-    }
-
-    this._coords = universe.validateCoords(coordsCandidate);
+  get directionRide() {
+    this._directionRide = getDirection();
+    return this._directionRide;
   }
 }
