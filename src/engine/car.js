@@ -1,4 +1,5 @@
-import {getDirection} from '../utils.js';
+import {getRandomItemFromArray} from '../utils.js';
+import {DIRECTIONS} from '../const';
 
 export default class Car {
   constructor(speed, life, directionRide) {
@@ -12,7 +13,11 @@ export default class Car {
   }
 
   get directionRide() {
-    this._directionRide = getDirection();
+    this._directionRide = Car.getDirection();
     return this._directionRide;
+  }
+
+  static getDirection() {
+    return getRandomItemFromArray(DIRECTIONS);
   }
 }

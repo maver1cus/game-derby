@@ -1,5 +1,5 @@
 import Game from './src/engine/game.js';
-import {getDirection} from './src/utils.js';
+import Car from './src/engine/car';
 
 const config = {
   elements: [
@@ -7,14 +7,14 @@ const config = {
       coords: {x: 0, y: 0},
       life: 50,
       speed: 1,
-      directionRide: getDirection(),
+      directionRide: Car.getDirection(),
       type: 'car'
     },
     {
       coords: {x: 20, y: 20},
       life: 50,
       speed: 1,
-      directionRide: getDirection(),
+      directionRide: Car.getDirection(),
       type: 'car'
     },
     {
@@ -31,4 +31,4 @@ const config = {
 
 const game = Game.create(config);
 
-game.start()
+game.start();

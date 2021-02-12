@@ -12,11 +12,10 @@ export default class Game {
   gameStep() {
     this._world.render();
     console.log(this._world);
-
   }
 
 
   static create(config) {
     return new Game(config);
   }
-};
+}
