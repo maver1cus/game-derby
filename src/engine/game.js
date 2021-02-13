@@ -1,6 +1,8 @@
+import World from './world.js';
+
 export default class Game {
   constructor(config) {
-    this._config = config;
+    this._world = World.create(config);
   }
 
   start() {
@@ -8,10 +10,12 @@ export default class Game {
   }
 
   gameStep() {
-    console.log(`game step:`, this._config);
+    this._world.recount();
+    console.log(this._world);
   }
+
 
   static create(config) {
     return new Game(config);
   }
-};
+}
