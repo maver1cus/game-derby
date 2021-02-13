@@ -10,7 +10,7 @@ export default class Game {
   }
 
   gameStep() {
-    this._world.render();
+    this._world.recount();
     console.log(this._world);
   }
 

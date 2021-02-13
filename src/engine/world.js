@@ -38,7 +38,7 @@ export default class World {
     };
   }
 
-  render() {
+  recount() {
     this._elements.forEach((element) => {
       if (element._speed) {
         const speed = element.speed;
