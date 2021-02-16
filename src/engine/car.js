@@ -1,5 +1,5 @@
 import {getRandomItemFromArray} from '../utils.js';
-import {DIRECTIONS} from '../const';
+import {DIRECTIONS} from '../const.js';
 
 export default class Car {
   constructor(speed, life, directionRide) {

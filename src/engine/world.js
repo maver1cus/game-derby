@@ -1,6 +1,3 @@
-import Item from './item.js';
-import Car from './car.js';
-
 export default class World {
   constructor(config) {
     this._size = config.worldSize;
@@ -11,21 +8,9 @@ export default class World {
   }
 
   init(elements) {
-    elements.forEach((element) => {
-      let newElement;
-
-      switch (element.type) {
-        case `car`:
-          newElement = new Car(
-              element.speed, element.life, element.directionRide
-          );
-          break;
-        case `item`:
-          newElement = new Item();
-          break;
-      }
-      this._elements.push(newElement);
-      this._elementsPositions.set(newElement, element.coords);
+    elements.forEach(({element, coords}) => {
+      this._elements.push(element);
+      this._elementsPositions.set(element, coords);
     });
   }
 

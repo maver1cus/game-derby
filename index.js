@@ -1,29 +1,24 @@
 import Game from './src/engine/game.js';
-import Car from './src/engine/car';
+import Car from './src/engine/car.js';
+import Item from './src/engine/item.js';
 
 const config = {
   elements: [
     {
-      coords: {x: 0, y: 0},
-      life: 50,
-      speed: 1,
-      directionRide: Car.getDirection(),
-      type: 'car'
+      element: new Car(1, 50, Car.getDirection()),
+      coords: {x: 0, y: 0}
     },
     {
-      coords: {x: 20, y: 20},
-      life: 50,
-      speed: 1,
-      directionRide: Car.getDirection(),
-      type: 'car'
+      element: new Car(1, 50, Car.getDirection()),
+      coords: {x: 20, y: 20}
     },
     {
-      coords: {x: 3, y: 4},
-      type: 'item'
+      element: new Item(),
+      coords: {x: 3, y: 4}
     },
     {
-      coords: {x: 4, y: 5},
-      type: 'item'
+      element: new Item(),
+      coords: {x: 4, y: 5}
     }
   ],
   worldSize: {width: 20, height: 20}
