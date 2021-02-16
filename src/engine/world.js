@@ -1,3 +1,5 @@
+import {Directions} from '../const.js';
+
 export default class World {
   constructor(config) {
     this._size = config.worldSize;
@@ -31,16 +33,16 @@ export default class World {
         let coords = this._elementsPositions.get(element);
 
         switch (direction) {
-          case `left`:
+          case Directions.LEFT:
             coords.x = coords.x - speed;
             break;
-          case `right`:
+          case Directions.RIGHT:
             coords.x = coords.x + speed;
             break;
-          case `top`:
+          case Directions.UP:
             coords.y = coords.y - speed;
             break;
-          case `bottom`:
+          case Directions.DOWN:
             coords.y = coords.y + speed;
             break;
         }
