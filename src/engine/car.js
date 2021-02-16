@@ -6,10 +6,15 @@ export default class Car {
     this._life = life;
     this._speed = speed;
     this._directionRide = directionRide;
+    this._symbol = `*`;
   }
 
   get speed() {
     return this._speed;
+  }
+
+  get symbol() {
+    return this._symbol;
   }
 
   get directionRide() {

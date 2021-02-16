@@ -20,8 +20,8 @@ export default class World {
     const {x, y} = coords;
 
     return {
-      x: Math.min(Math.max(0, x), this._size.width),
-      y: Math.min(Math.max(0, y), this._size.height)
+      x: Math.min(Math.max(0, x), this._size.width - 1),
+      y: Math.min(Math.max(0, y), this._size.height - 1)
     };
   }
 
@@ -52,7 +52,19 @@ export default class World {
     });
   }
 
-  static create(worldSize) {
-    return new World(worldSize);
+  getElements() {
+    return this._elements;
+  }
+
+  getSize() {
+    return this._size;
+  }
+
+  getCoordsElement(element) {
+    return this._elementsPositions.get(element);
+  }
+
+  static create(config) {
+    return new World(config);
   }
 }
