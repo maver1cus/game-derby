@@ -11,8 +11,8 @@ export default class Screen {
       output.push(Array(worldSize.width).fill(` `));
     }
     const elements = this._world.getElements();
-    elements.forEach((element) => {
-      const {x, y} = this._world.getCoordsElement(element);
+    elements.forEach((coords, element) => {
+      const {x, y} = coords;
       output[y][x] = element.symbol;
     });
 

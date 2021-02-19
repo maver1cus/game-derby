@@ -3,16 +3,14 @@ import {Directions} from '../const.js';
 export default class World {
   constructor(config) {
     this._size = config.worldSize;
-    this._elementsPositions = new Map();
-    this._elements = [];
+    this._elements = new Map();
 
     this.init(config.elements);
   }
 
   init(elements) {
     elements.forEach(({element, coords}) => {
-      this._elements.push(element);
-      this._elementsPositions.set(element, coords);
+      this._elements.set(element, coords);
     });
   }
 
@@ -26,11 +24,10 @@ export default class World {
   }
 
   recount() {
-    this._elements.forEach((element) => {
+    this._elements.forEach((coords, element) => {
       if (element._speed) {
         const speed = element.speed;
         const direction = element.directionRide;
-        let coords = this._elementsPositions.get(element);
 
         switch (direction) {
           case Directions.LEFT:
@@ -47,7 +44,7 @@ export default class World {
             break;
         }
         coords = this._validateCoords(coords);
-        this._elementsPositions.set(element, coords);
+        this._elements.set(element, coords);
       }
     });
   }
@@ -61,7 +58,7 @@ export default class World {
   }
 
   getCoordsElement(element) {
-    return this._elementsPositions.get(element);
+    return this._elements.get(element);
   }
 
   static create(config) {
