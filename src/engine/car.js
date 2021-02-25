@@ -8,11 +8,11 @@ export default class Car {
     this._directionRide = directionRide;
   }
 
-  get speed() {
+  getSpeed() {
     return this._speed;
   }
 
-  get directionRide() {
+  getDirectionRide() {
     this._directionRide = Car.getDirection();
 
     return this._directionRide;

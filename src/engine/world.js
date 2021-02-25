@@ -25,9 +25,9 @@ export default class World {
 
   recount() {
     this._elements.forEach((coords, element) => {
-      if (element._speed) {
-        const speed = element.speed;
-        const direction = element.directionRide;
+      if (element.getSpeed) {
+        const speed = element.getSpeed();
+        const direction = element.getDirectionRide();
 
         switch (direction) {
           case Directions.LEFT:
@@ -56,10 +56,6 @@ export default class World {
 
   getSize() {
     return this._size;
-  }
-
-  getCoordsElement(element) {
-    return this._elements.get(element);
   }
 
   static create(config) {
