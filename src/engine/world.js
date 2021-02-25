@@ -43,6 +43,7 @@ export default class World {
             coords.y = coords.y + speed;
             break;
         }
+
         coords = this._validateCoords(coords);
         this._elements.set(element, coords);
       }

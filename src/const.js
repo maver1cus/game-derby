@@ -4,3 +4,8 @@ export const Directions = {
   UP: `up`,
   DOWN: `down`
 };
+
+export const SymbolsForPrintElements = {
+  CAR: `*`,
+  ITEM: `+`
+};
