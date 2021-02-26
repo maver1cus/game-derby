@@ -2,13 +2,27 @@ import Car from './car.js';
 import {SymbolsForPrintElements} from '../const.js';
 import Item from './item.js';
 
+const configSymbolsElementsForPrint = [
+  {element: Item, symbol: SymbolsForPrintElements.ITEM},
+  {element: Car, symbol: SymbolsForPrintElements.CAR}
+];
+
+const createSymbolsElementsForPrint = (items) => {
+  const symbols = new Map();
+
+  items.forEach(({element, symbol}) => {
+    symbols.set(element, symbol);
+  });
+
+  return symbols;
+};
+
 export default class Screen {
   constructor(world) {
     this._world = world;
-    this._symbolsForItems = Screen.createSymbolsItemsForPrint([
-      {element: Item, symbol: SymbolsForPrintElements.ITEM},
-      {element: Car, symbol: SymbolsForPrintElements.CAR}
-    ]);
+    this._symbolsForItems = createSymbolsElementsForPrint(
+        configSymbolsElementsForPrint
+    );
   }
 
   print() {
@@ -40,15 +54,5 @@ export default class Screen {
 
   static create(world) {
     return new Screen(world);
-  }
-
-  static createSymbolsItemsForPrint(items) {
-    const symbols = new Map();
-
-    items.forEach(({element, symbol}) => {
-      symbols.set(element, symbol);
-    });
-
-    return symbols;
   }
 }
