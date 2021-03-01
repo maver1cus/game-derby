@@ -1,8 +1,10 @@
 import World from './world.js';
+import Screen from './screen.js';
 
 export default class Game {
   constructor(config) {
     this._world = World.create(config);
+    this._screen = Screen.create(this._world);
   }
 
   start() {
@@ -11,7 +13,7 @@ export default class Game {
 
   gameStep() {
     this._world.recount();
-    console.log(this._world);
+    this._screen.print();
   }
 
 

@@ -1,31 +1,16 @@
-import Item from './item.js';
-import Car from './car.js';
+import {Directions} from '../const.js';
 
 export default class World {
   constructor(config) {
     this._size = config.worldSize;
-    this._elementsPositions = new Map();
-    this._elements = [];
+    this._elements = new Map();
 
     this.init(config.elements);
   }
 
   init(elements) {
-    elements.forEach((element) => {
-      let newElement;
-
-      switch (element.type) {
-        case `car`:
-          newElement = new Car(
-              element.speed, element.life, element.directionRide
-          );
-          break;
-        case `item`:
-          newElement = new Item();
-          break;
-      }
-      this._elements.push(newElement);
-      this._elementsPositions.set(newElement, element.coords);
+    elements.forEach(({element, coords}) => {
+      this._elements.set(element, coords);
     });
   }
 
@@ -33,39 +18,47 @@ export default class World {
     const {x, y} = coords;
 
     return {
-      x: Math.min(Math.max(0, x), this._size.width),
-      y: Math.min(Math.max(0, y), this._size.height)
+      x: Math.min(Math.max(0, x), this._size.width - 1),
+      y: Math.min(Math.max(0, y), this._size.height - 1)
     };
   }
 
   recount() {
-    this._elements.forEach((element) => {
-      if (element._speed) {
-        const speed = element.speed;
-        const direction = element.directionRide;
-        let coords = this._elementsPositions.get(element);
+    this._elements.forEach((coords, element) => {
+      if (element.getSpeed) {
+        const speed = element.getSpeed();
+        const direction = element.getDirectionRide();
 
         switch (direction) {
-          case `left`:
+          case Directions.LEFT:
             coords.x = coords.x - speed;
             break;
-          case `right`:
+          case Directions.RIGHT:
             coords.x = coords.x + speed;
             break;
-          case `top`:
+          case Directions.UP:
             coords.y = coords.y - speed;
             break;
-          case `bottom`:
+          case Directions.DOWN:
             coords.y = coords.y + speed;
             break;
         }
+
         coords = this._validateCoords(coords);
-        this._elementsPositions.set(element, coords);
+        this._elements.set(element, coords);
       }
     });
   }
 
-  static create(worldSize) {
-    return new World(worldSize);
+  getElements() {
+    return this._elements;
+  }
+
+  getSize() {
+    return this._size;
+  }
+
+  static create(config) {
+    return new World(config);
   }
 }
