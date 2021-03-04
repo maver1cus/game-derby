@@ -16,6 +16,14 @@ export default class Car {
     return this._directionRide;
   }
 
+  _changeDirection() {
+    const directions = Object
+        .keys(Directions)
+        .filter((direction) => Directions[direction] !== this._directionRide);
+    const randomDirection = getRandomItemFromArray(directions);
+    this._directionRide = Directions[randomDirection];
+  }
+
   static getRandomDirection() {
     const randomKey = getRandomItemFromArray(Object.keys(Directions));
 

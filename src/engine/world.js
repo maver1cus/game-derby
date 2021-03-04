@@ -28,24 +28,33 @@ export default class World {
       if (element.getSpeed) {
         const speed = element.getSpeed();
         const direction = element.getDirectionRide();
+        const candidateCoords = {x: coords.x, y: coords.y};
 
         switch (direction) {
           case Directions.LEFT:
-            coords.x = coords.x - speed;
+            candidateCoords.x = candidateCoords.x - speed;
             break;
           case Directions.RIGHT:
-            coords.x = coords.x + speed;
+            candidateCoords.x = candidateCoords.x + speed;
             break;
           case Directions.UP:
-            coords.y = coords.y - speed;
+            candidateCoords.y = candidateCoords.y - speed;
             break;
           case Directions.DOWN:
-            coords.y = coords.y + speed;
+            candidateCoords.y = candidateCoords.y + speed;
             break;
         }
 
-        coords = this._validateCoords(coords);
-        this._elements.set(element, coords);
+        if (!this._isValidCoords(candidateCoords)) {
+          element._changeDirection();
+          return;
+        }
+        if (!this.isEmptyCoords(candidateCoords)) {
+          element._changeDirection();
+          return;
+        }
+
+        this._elements.set(element, candidateCoords);
       }
     });
   }
@@ -60,5 +69,24 @@ export default class World {
 
   static create(config) {
     return new World(config);
+  }
+
+  _isValidCoords({x, y}) {
+    return (
+      !(x < 0
+        || x > this._size.width - 1
+        || y < 0
+        || y > this._size.height - 1)
+    );
+  }
+
+  isEmptyCoords({x, y}) {
+    let isEmpty = true;
+    this._elements.forEach((value) => {
+      if (value.x === x && value.y === y) {
+        isEmpty = false;
+      }
+    });
+    return isEmpty;
   }
 }

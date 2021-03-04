@@ -6,19 +6,27 @@ const config = {
   elements: [
     {
       element: new Car(1, 50, Car.getRandomDirection()),
-      coords: {x: 0, y: 0}
+      coords: {x: 10, y: 10}
     },
     {
       element: new Car(1, 50, Car.getRandomDirection()),
-      coords: {x: 20, y: 20}
+      coords: {x: 11, y: 11}
     },
     {
       element: new Item(),
-      coords: {x: 3, y: 4}
+      coords: {x: 10, y: 8}
     },
     {
       element: new Item(),
-      coords: {x: 4, y: 5}
+      coords: {x: 10, y: 12}
+    },
+    {
+      element: new Item(),
+      coords: {x: 8, y: 10}
+    },
+    {
+      element: new Item(),
+      coords: {x: 12, y: 10}
     }
   ],
   worldSize: {width: 20, height: 20}
