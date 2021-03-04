@@ -13,8 +13,6 @@ export default class Car {
   }
 
   getDirectionRide() {
-    this._directionRide = Car.getRandomDirection();
-
     return this._directionRide;
   }
 
