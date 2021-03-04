@@ -4,6 +4,7 @@ export default class World {
   constructor(config) {
     this._size = config.worldSize;
     this._elements = new Map();
+    this._emitter = config.emitter;
 
     this.init(config.elements);
   }
@@ -12,6 +13,8 @@ export default class World {
     elements.forEach(({element, coords}) => {
       this._elements.set(element, coords);
     });
+
+    this._emitter.subscribe('car:destroy', this._removeElement.bind(this));
   }
 
   _validateCoords(coords) {
@@ -21,6 +24,10 @@ export default class World {
       x: Math.min(Math.max(0, x), this._size.width - 1),
       y: Math.min(Math.max(0, y), this._size.height - 1)
     };
+  }
+
+  _removeElement(element) {
+    this._elements.delete(element);
   }
 
   recount() {
@@ -46,11 +53,11 @@ export default class World {
         }
 
         if (!this._isValidCoords(candidateCoords)) {
-          element._changeDirection();
+          this._emitter.emit('world:end', element);
           return;
         }
         if (!this.isEmptyCoords(candidateCoords)) {
-          element._changeDirection();
+          this._emitter.emit('world:crash', element);
           return;
         }
 
