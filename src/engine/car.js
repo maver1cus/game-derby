@@ -13,12 +13,12 @@ export default class Car {
   }
 
   getDirectionRide() {
-    this._directionRide = Car.getDirection();
+    this._directionRide = Car.getRandomDirection();
 
     return this._directionRide;
   }
 
-  static getDirection() {
+  static getRandomDirection() {
     const randomKey = getRandomItemFromArray(Object.keys(Directions));
 
     return Directions[randomKey];

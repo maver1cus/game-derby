@@ -5,11 +5,11 @@ import Item from './src/engine/item.js';
 const config = {
   elements: [
     {
-      element: new Car(1, 50, Car.getDirection()),
+      element: new Car(1, 50, Car.getRandomDirection()),
       coords: {x: 0, y: 0}
     },
     {
-      element: new Car(1, 50, Car.getDirection()),
+      element: new Car(1, 50, Car.getRandomDirection()),
       coords: {x: 20, y: 20}
     },
     {
