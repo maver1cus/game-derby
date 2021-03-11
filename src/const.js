@@ -10,4 +10,4 @@ export const SymbolsForPrintElements = {
   ITEM: `+`
 };
 
-export const countDamageToCrash = 10;
+export const VALUE_DAMAGE_TO_CRASH = 10;

@@ -1,9 +1,9 @@
 import Game from './src/engine/game.js';
 import Car from './src/engine/car.js';
 import Item from './src/engine/item.js';
-import Emitter from './src/engine/emitter.js';
+import BusEvents from './src/engine/bus-events.js';
 
-const emitter = new Emitter();
+const emitter = new BusEvents();
 
 const config = {
   elements: [

@@ -1,5 +1,6 @@
 import {getRandomItemFromArray} from '../utils.js';
-import {countDamageToCrash, Directions} from '../const.js';
+import {VALUE_DAMAGE_TO_CRASH, Directions} from '../const.js';
+import World from './world.js';
 
 export default class Car {
   constructor(speed, life, directionRide, emitter) {
@@ -12,22 +13,25 @@ export default class Car {
   }
 
   init() {
-    this._emitter.subscribe('world:crash', this._crash.bind(this));
-    this._emitter.subscribe('world:end', this._worldEnd.bind(this));
+    this._emitter.subscribe(World.events.crash, this._handleCrash.bind(this));
+    this._emitter.subscribe(World.events.end, this._handeleWorldEnd.bind(this));
   }
 
-  _crash(element) {
+  _handleCrash(element) {
     if (element !== this) {
       return;
     }
-    this._life = this._life - countDamageToCrash;
+
+    this._life = this._life - VALUE_DAMAGE_TO_CRASH;
+
     if (this._life < 0) {
-      this._emitter.emit('car:destroy', this);
+      this._emitter.emit(Car.events.destroy, this);
     }
+
     this._changeDirection();
   }
 
-  _worldEnd(element) {
+  _handeleWorldEnd(element) {
     if (element !== this) {
       return;
     }
@@ -49,6 +53,10 @@ export default class Car {
         .filter((direction) => Directions[direction] !== this._directionRide);
     const randomDirection = getRandomItemFromArray(directions);
     this._directionRide = Directions[randomDirection];
+  }
+
+  static events = {
+    destroy: 'car:destroy'
   }
 
   static getRandomDirection() {

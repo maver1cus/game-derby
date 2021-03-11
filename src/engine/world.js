@@ -1,4 +1,5 @@
 import {Directions} from '../const.js';
+import Car from './car.js';
 
 export default class World {
   constructor(config) {
@@ -14,7 +15,7 @@ export default class World {
       this._elements.set(element, coords);
     });
 
-    this._emitter.subscribe('car:destroy', this._removeElement.bind(this));
+    this._emitter.subscribe(Car.events.destroy, this._handleRemoveElement.bind(this));
   }
 
   _validateCoords(coords) {
@@ -26,7 +27,7 @@ export default class World {
     };
   }
 
-  _removeElement(element) {
+  _handleRemoveElement(element) {
     this._elements.delete(element);
   }
 
@@ -53,11 +54,11 @@ export default class World {
         }
 
         if (!this._isValidCoords(candidateCoords)) {
-          this._emitter.emit('world:end', element);
+          this._emitter.emit(World.events.end, element);
           return;
         }
         if (!this.isEmptyCoords(candidateCoords)) {
-          this._emitter.emit('world:crash', element);
+          this._emitter.emit(World.events.crash, element);
           return;
         }
 
@@ -72,10 +73,6 @@ export default class World {
 
   getSize() {
     return this._size;
-  }
-
-  static create(config) {
-    return new World(config);
   }
 
   _isValidCoords({x, y}) {
@@ -95,5 +92,14 @@ export default class World {
       }
     });
     return isEmpty;
+  }
+
+  static events = {
+    crash: 'world:crash',
+    end: 'world:end'
+  }
+
+  static create(config) {
+    return new World(config);
   }
 }
