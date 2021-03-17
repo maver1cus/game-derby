@@ -1,37 +1,23 @@
 import {getRandomItemFromArray} from '../utils.js';
-import {VALUE_DAMAGE_TO_CRASH, Directions} from '../const.js';
-import World from './world.js';
+import {Directions} from '../const.js';
+import Item from './item.js';
 
-export default class Car {
-  constructor(speed, life, directionRide, emitter) {
-    this._life = life;
-    this._speed = speed;
+export default class Car extends Item {
+  constructor(speed, life, valueDamageToCrash, directionRide, busEvents) {
+    super(speed, life, valueDamageToCrash);
     this._directionRide = directionRide;
-    this._emitter = emitter;
+    this._busEvents = busEvents;
 
     this.init();
   }
 
-  init() {
-    this._emitter.subscribe(World.events.crash, this._handleCrash.bind(this));
-    this._emitter.subscribe(World.events.end, this._handeleWorldEnd.bind(this));
-  }
-
-  _handleCrash(element) {
-    if (element !== this) {
-      return;
-    }
-
-    this._life = this._life - VALUE_DAMAGE_TO_CRASH;
-
-    if (this._life < 0) {
-      this._emitter.emit(Car.events.destroy, this);
-    }
+  _handleCrash(element, element2) {
+    super._handleCrash();
 
     this._changeDirection();
   }
 
-  _handeleWorldEnd(element) {
+  _handleWorldEnd(element) {
     if (element !== this) {
       return;
     }
@@ -51,12 +37,10 @@ export default class Car {
     const directions = Object
         .keys(Directions)
         .filter((direction) => Directions[direction] !== this._directionRide);
-    const randomDirection = getRandomItemFromArray(directions);
-    this._directionRide = Directions[randomDirection];
-  }
 
-  static events = {
-    destroy: 'car:destroy'
+    const randomDirection = getRandomItemFromArray(directions);
+
+    this._directionRide = Directions[randomDirection];
   }
 
   static getRandomDirection() {

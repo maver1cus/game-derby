@@ -3,37 +3,33 @@ import Car from './src/engine/car.js';
 import Item from './src/engine/item.js';
 import BusEvents from './src/engine/bus-events.js';
 
-const emitter = new BusEvents();
+const busEvents = new BusEvents();
 
 const config = {
   elements: [
     {
-      element: new Car(1, 50, Car.getRandomDirection(), emitter),
+      element: new Car(1, 50, 5, Car.getRandomDirection(), busEvents),
       coords: {x: 10, y: 10}
     },
     {
-      element: new Car(1, 50, Car.getRandomDirection(), emitter),
-      coords: {x: 11, y: 11}
+      element: new Car(1, 50, 5, Car.getRandomDirection(), busEvents),
+      coords: {x: 15, y: 15}
     },
     {
-      element: new Item(),
-      coords: {x: 10, y: 8}
+      element: new Item(0, 100, 10, busEvents),
+      coords: {x: 9, y: 10}
     },
     {
-      element: new Item(),
-      coords: {x: 10, y: 12}
+      element: new Item(0, 100, 10, busEvents),
+      coords: {x: 11, y: 10}
     },
     {
-      element: new Item(),
-      coords: {x: 8, y: 10}
-    },
-    {
-      element: new Item(),
-      coords: {x: 12, y: 10}
+      element: new Item(0, 100, 10, busEvents),
+      coords: {x: 10, y: 9}
     }
   ],
   worldSize: {width: 20, height: 20},
-  emitter
+  busEvents
 };
 
 const game = Game.create(config);

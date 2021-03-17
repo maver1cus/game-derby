@@ -1,11 +1,11 @@
 import {Directions} from '../const.js';
-import Car from './car.js';
+import BusEvents from './bus-events.js';
 
 export default class World {
   constructor(config) {
     this._size = config.worldSize;
     this._elements = new Map();
-    this._emitter = config.emitter;
+    this._busEvents = config.busEvents;
 
     this.init(config.elements);
   }
@@ -15,16 +15,9 @@ export default class World {
       this._elements.set(element, coords);
     });
 
-    this._emitter.subscribe(Car.events.destroy, this._handleRemoveElement.bind(this));
-  }
-
-  _validateCoords(coords) {
-    const {x, y} = coords;
-
-    return {
-      x: Math.min(Math.max(0, x), this._size.width - 1),
-      y: Math.min(Math.max(0, y), this._size.height - 1)
-    };
+    this._busEvents.subscribe(
+        BusEvents.Events.Item.DESTROY, this._handleRemoveElement.bind(this)
+    );
   }
 
   _handleRemoveElement(element) {
@@ -54,14 +47,17 @@ export default class World {
         }
 
         if (!this._isValidCoords(candidateCoords)) {
-          this._emitter.emit(World.events.end, element);
-          return;
-        }
-        if (!this.isEmptyCoords(candidateCoords)) {
-          this._emitter.emit(World.events.crash, element);
+          this._busEvents.emit(BusEvents.Events.World.END, element);
           return;
         }
 
+        const markElement = this._getElementToCoords(candidateCoords);
+
+        if (markElement) {
+          this.
+              _busEvents
+              .emit(BusEvents.Events.World.CRASH, element, markElement);
+        }
         this._elements.set(element, candidateCoords);
       }
     });
@@ -75,6 +71,16 @@ export default class World {
     return this._size;
   }
 
+  _getElementToCoords({x, y}) {
+    let markElement = false;
+    this._elements.forEach((coords, element) => {
+      if (coords.x === x && coords.y === y) {
+        markElement = element;
+      }
+    });
+    return markElement;
+  }
+
   _isValidCoords({x, y}) {
     return (
       !(x < 0
@@ -82,21 +88,6 @@ export default class World {
         || y < 0
         || y > this._size.height - 1)
     );
-  }
-
-  isEmptyCoords({x, y}) {
-    let isEmpty = true;
-    this._elements.forEach((value) => {
-      if (value.x === x && value.y === y) {
-        isEmpty = false;
-      }
-    });
-    return isEmpty;
-  }
-
-  static events = {
-    crash: 'world:crash',
-    end: 'world:end'
   }
 
   static create(config) {

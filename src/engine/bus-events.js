@@ -1,27 +1,15 @@
-export default class BusEvents {
-  constructor() {
-    this.listeners = {};
-  }
+import Emitter from './emitter.js';
 
-  emit(event, ...args) {
-    if (!Array.isArray(this.listeners[event])) {
-      return false;
-    }
-
-    this.listeners[event].forEach((listener) => {
-      listener(...args);
-    });
-
-    return true;
-  }
-
-  subscribe(event, fn) {
-    this.listeners[event] = this.listeners[event] || [];
-    this.listeners[event].push(fn);
-
-    return () => {
-      this.listeners[event] = this.listeners[event]
-          .filter((listener) => listener !== fn);
+export default class BusEvents extends Emitter {
+  static get Events() {
+    return {
+      World: {
+        CRASH: 'world:crash',
+        END: 'world:end'
+      },
+      Item: {
+        DESTROY: 'car:destroy'
+      }
     };
   }
 }
