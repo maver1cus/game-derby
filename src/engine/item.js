@@ -23,8 +23,8 @@ export default class Item {
       return;
     }
 
-    element._life = element._life - markElement._valueDamageToCrash;
-    markElement._life = markElement._life - element._valueDamageToCrash;
+    element.takingDamage(markElement.getValueDamageToCrash());
+    markElement.takingDamage(element.getValueDamageToCrash());
 
     if (element._life < 0) {
       this._busEvents.emit(BusEvents.Events.Item.DESTROY, element);
@@ -33,5 +33,13 @@ export default class Item {
     if (markElement._life < 0) {
       this._busEvents.emit(BusEvents.Events.Item.DESTROY, markElement);
     }
+  }
+
+  takingDamage(damage) {
+    this._life = this._life - damage;
+  }
+
+  getValueDamageToCrash() {
+    return this._valueDamageToCrash;
   }
 }
