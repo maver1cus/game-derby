@@ -9,3 +9,5 @@ export const SymbolsForPrintElements = {
   CAR: `*`,
   ITEM: `+`
 };
+
+export const VALUE_DAMAGE_TO_CRASH = 10;
