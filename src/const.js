@@ -10,4 +10,11 @@ export const SymbolsForPrintElements = {
   ITEM: `+`
 };
 
+export const ColorFoPrintElements = {
+  CAR: '#000',
+  ITEM: '#fcf'
+};
+
+export const SIZE_FIELD_WORLD = 30;
+
 export const VALUE_DAMAGE_TO_CRASH = 10;

@@ -4,6 +4,7 @@ import Item from './src/engine/item.js';
 import BusEvents from './src/engine/bus-events.js';
 
 const busEvents = new BusEvents();
+const rootElement = document.getElementById(`root`);
 
 const config = {
   elements: [
@@ -29,7 +30,8 @@ const config = {
     }
   ],
   worldSize: {width: 20, height: 20},
-  busEvents
+  busEvents,
+  rootElement
 };
 
 const game = Game.create(config);
