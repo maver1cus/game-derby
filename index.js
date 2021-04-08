@@ -2,9 +2,13 @@ import Game from './src/engine/game.js';
 import Car from './src/engine/car.js';
 import Item from './src/engine/item.js';
 import BusEvents from './src/engine/bus-events.js';
+import {isBrowser} from './src/utils.js';
 
 const busEvents = new BusEvents();
-const rootElement = document.getElementById(`root`);
+
+const rootElement = isBrowser()
+  ? document.getElementById('root')
+  : null;
 
 const config = {
   elements: [
@@ -33,6 +37,7 @@ const config = {
   busEvents,
   rootElement
 };
+
 
 const game = Game.create(config);
 

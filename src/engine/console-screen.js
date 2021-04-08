@@ -17,7 +17,7 @@ const createSymbolsElementsForPrint = (items) => {
   return symbols;
 };
 
-export default class Screen {
+export default class ConsoleScreen {
   constructor(world) {
     this._world = world;
     this._symbolsForItems = createSymbolsElementsForPrint(
@@ -51,8 +51,7 @@ export default class Screen {
     console.log('');
   }
 
-
   static create(world) {
-    return new Screen(world);
+    return new ConsoleScreen(world);
   }
 }
