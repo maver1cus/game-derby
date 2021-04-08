@@ -1,54 +1,51 @@
 import Car from './car.js';
-import {SymbolsForPrintElements} from '../const.js';
 import Item from './item.js';
 
-const configSymbolsElementsForPrint = [
-  {element: Item, symbol: SymbolsForPrintElements.ITEM},
-  {element: Car, symbol: SymbolsForPrintElements.CAR}
-];
-
-const createSymbolsElementsForPrint = (items) => {
-  const symbols = new Map();
-
-  items.forEach(({element, symbol}) => {
-    symbols.set(element, symbol);
-  });
-
-  return symbols;
-};
+const SYMBOLS = new Map([
+  [Item, '+'],
+  [Car, '*']
+]);
 
 export default class ConsoleScreen {
   constructor(world) {
     this._world = world;
-    this._symbolsForItems = createSymbolsElementsForPrint(
-        configSymbolsElementsForPrint
-    );
+    this._display = null;
+
+    this._createDisplay();
   }
 
   print() {
     const worldSize = this._world.getSize();
-    const output = [];
-
-    for (let i = 0; i < worldSize.height; i++) {
-      output.push(Array(worldSize.width).fill(` `));
-    }
+    this._clearDisplay();
 
     const elements = this._world.getElements();
 
     elements.forEach((coords, element) => {
       const {x, y} = coords;
-      output[y][x] = this._symbolsForItems.get(element.constructor);
+      this._display[y][x] = SYMBOLS.get(element.constructor);
     });
 
     console.log(Array(worldSize.width + 1).fill(`-`).join(` `));
     console.log(
-        output
+        this._display
             .map((row) => `|` + row.join(` `) + `|`)
             .join(`\n`)
     );
 
     console.log(Array(worldSize.width + 1).fill(`-`).join(` `));
     console.log('');
+  }
+
+  _createDisplay() {
+    const {width, height} = this._world.getSize();
+
+    this._display = new Array(height).fill([])
+        .map(() => new Array(width).fill(' '));
+  }
+
+  _clearDisplay() {
+    this._display = this._display
+        .map((row) => row.map(() => ' '));
   }
 
   static create(world) {
