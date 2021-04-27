@@ -10,3 +10,5 @@ export const getRandomItemFromArray = function(array) {
 
   return array[randomIndex];
 };
+
+export const isBrowser = () => typeof window != 'undefined' && window.document;
