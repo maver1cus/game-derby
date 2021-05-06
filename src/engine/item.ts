@@ -1,25 +1,26 @@
-// @ts-nocheck
 import BusEvents from './bus-events';
+import IItem from "./item.inteface";
 
-export default class Item {
-  constructor(speed, life, valueDamageToCrash, busEvents) {
-    this._life = life;
-    this._speed = speed;
-    this._valueDamageToCrash = valueDamageToCrash;
-    this._busEvents = busEvents;
+export default class Item implements IItem{
+  private speed: number;
+  private life: number;
+  private readonly valueDamageToCrash: number;
+  busEvents: BusEvents;
+
+  constructor(speed: number, life: number, valueDamageToCrash: number, busEvents: BusEvents) {
+    this.speed = speed;
+    this.life = life;
+    this.valueDamageToCrash = valueDamageToCrash;
+    this.busEvents = busEvents;
   }
 
   init() {
-    this._busEvents.subscribe(
-      BusEvents.Events.World.CRASH, this._handleCrash.bind(this)
-    );
-
-    this._busEvents.subscribe(
-      BusEvents.Events.World.END, this._handleWorldEnd.bind(this)
+    this.busEvents.subscribe(
+      BusEvents.Events.World.CRASH, this.handleCrash.bind(this)
     );
   }
 
-  _handleCrash(element, markElement) {
+  handleCrash(element: Item, markElement: Item) {
     if (element !== this) {
       return;
     }
@@ -27,20 +28,20 @@ export default class Item {
     element.takingDamage(markElement.getValueDamageToCrash());
     markElement.takingDamage(element.getValueDamageToCrash());
 
-    if (element._life < 0) {
-      this._busEvents.emit(BusEvents.Events.Item.DESTROY, element);
+    if (element.life < 0) {
+      this.busEvents.emit(BusEvents.Events.Item.DESTROY, element);
     }
 
-    if (markElement._life < 0) {
-      this._busEvents.emit(BusEvents.Events.Item.DESTROY, markElement);
+    if (markElement.life < 0) {
+      this.busEvents.emit(BusEvents.Events.Item.DESTROY, markElement);
     }
   }
 
-  takingDamage(damage) {
-    this._life = this._life - damage;
+  takingDamage(damage: number) {
+    this.life = this.life - damage
   }
 
   getValueDamageToCrash() {
-    return this._valueDamageToCrash;
+    return this.valueDamageToCrash;
   }
 }

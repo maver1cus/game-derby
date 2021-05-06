@@ -1,9 +1,9 @@
-// @ts-nocheck
 import Game from './src/engine/game';
 import Car from './src/engine/car';
 import Item from './src/engine/item';
 import BusEvents from './src/engine/bus-events';
 import {isBrowser} from './src/utils';
+import {Config} from './src/types';
 
 const busEvents = new BusEvents();
 
@@ -11,7 +11,7 @@ const rootElement = isBrowser()
   ? document.getElementById('root')
   : null;
 
-const config = {
+const config:Config = {
   elements: [
     {
       element: new Car(1, 50, 5, Car.getRandomDirection(), busEvents),
