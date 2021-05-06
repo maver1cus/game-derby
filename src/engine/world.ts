@@ -1,5 +1,6 @@
-import {Directions} from '../const.js';
-import BusEvents from './bus-events.js';
+// @ts-nocheck
+import {Directions} from '../const';
+import BusEvents from './bus-events';
 
 export default class World {
   constructor(config) {
@@ -16,7 +17,7 @@ export default class World {
     });
 
     this._busEvents.subscribe(
-        BusEvents.Events.Item.DESTROY, this._handleRemoveElement.bind(this)
+      BusEvents.Events.Item.DESTROY, this._handleRemoveElement.bind(this)
     );
   }
 
@@ -55,8 +56,8 @@ export default class World {
 
         if (markElement) {
           this.
-              _busEvents
-              .emit(BusEvents.Events.World.CRASH, element, markElement);
+          _busEvents
+            .emit(BusEvents.Events.World.CRASH, element, markElement);
         }
         this._elements.set(element, candidateCoords);
       }

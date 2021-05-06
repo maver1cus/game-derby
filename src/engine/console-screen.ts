@@ -1,5 +1,6 @@
-import Car from './car.js';
-import Item from './item.js';
+// @ts-nocheck
+import Car from './car';
+import Item from './item';
 
 const SYMBOLS = new Map([
   [Item, '+'],
@@ -27,9 +28,9 @@ export default class ConsoleScreen {
 
     console.log(Array(worldSize.width + 1).fill(`-`).join(` `));
     console.log(
-        this._display
-            .map((row) => `|` + row.join(` `) + `|`)
-            .join(`\n`)
+      this._display
+        .map((row) => `|` + row.join(` `) + `|`)
+        .join(`\n`)
     );
 
     console.log(Array(worldSize.width + 1).fill(`-`).join(` `));
@@ -40,12 +41,12 @@ export default class ConsoleScreen {
     const {width, height} = this._world.getSize();
 
     this._display = new Array(height).fill([])
-        .map(() => new Array(width).fill(' '));
+      .map(() => new Array(width).fill(' '));
   }
 
   _clearDisplay() {
     this._display = this._display
-        .map((row) => row.map(() => ' '));
+      .map((row) => row.map(() => ' '));
   }
 
   static create(world) {

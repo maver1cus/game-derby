@@ -1,3 +1,4 @@
+// @ts-nocheck
 export default class Emitter {
   constructor() {
     this.listeners = {};
@@ -21,7 +22,7 @@ export default class Emitter {
 
     return () => {
       this.listeners[event] = this.listeners[event]
-          .filter((listener) => listener !== fn);
+        .filter((listener) => listener !== fn);
     };
   }
 }

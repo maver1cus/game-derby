@@ -1,6 +1,7 @@
-import {getRandomItemFromArray} from '../utils.js';
-import {Directions} from '../const.js';
-import Item from './item.js';
+// @ts-nocheck
+import {getRandomItemFromArray} from '../utils';
+import {Directions} from '../const';
+import Item from './item';
 
 export default class Car extends Item {
   constructor(speed, life, valueDamageToCrash, directionRide, busEvents) {
@@ -35,8 +36,8 @@ export default class Car extends Item {
 
   _changeDirection() {
     const directions = Object
-        .keys(Directions)
-        .filter((direction) => Directions[direction] !== this._directionRide);
+      .keys(Directions)
+      .filter((direction) => Directions[direction] !== this._directionRide);
 
     const randomDirection = getRandomItemFromArray(directions);
 

@@ -1,7 +1,8 @@
-import World from './world.js';
-import CanvasScreen from './canvas-screen.js';
-import ConsoleScreen from './console-screen.js';
-import {isBrowser} from '../utils.js';
+// @ts-nocheck
+import World from './world';
+import CanvasScreen from './canvas-screen';
+import ConsoleScreen from './console-screen';
+import {isBrowser} from '../utils';
 
 export default class Game {
   constructor(config) {

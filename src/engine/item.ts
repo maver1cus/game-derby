@@ -1,4 +1,5 @@
-import BusEvents from './bus-events.js';
+// @ts-nocheck
+import BusEvents from './bus-events';
 
 export default class Item {
   constructor(speed, life, valueDamageToCrash, busEvents) {
@@ -10,11 +11,11 @@ export default class Item {
 
   init() {
     this._busEvents.subscribe(
-        BusEvents.Events.World.CRASH, this._handleCrash.bind(this)
+      BusEvents.Events.World.CRASH, this._handleCrash.bind(this)
     );
 
     this._busEvents.subscribe(
-        BusEvents.Events.World.END, this._handleWorldEnd.bind(this)
+      BusEvents.Events.World.END, this._handleWorldEnd.bind(this)
     );
   }
 

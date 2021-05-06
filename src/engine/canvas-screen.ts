@@ -1,6 +1,7 @@
-import Car from './car.js';
-import {SIZE_FIELD_WORLD} from '../const.js';
-import Item from './item.js';
+// @ts-nocheck
+import Car from './car';
+import {SIZE_FIELD_WORLD} from '../const';
+import Item from './item';
 
 const COLORS = new Map([
   [Item, '#000'],
@@ -28,10 +29,10 @@ export default class CanvasScreen {
     elements.forEach((coords, element) => {
       this._display.ctx.fillStyle = COLORS.get(element.constructor);
       this._display.ctx.fillRect(
-          coords.x * SIZE_FIELD_WORLD,
-          coords.y * SIZE_FIELD_WORLD,
-          SIZE_FIELD_WORLD,
-          SIZE_FIELD_WORLD
+        coords.x * SIZE_FIELD_WORLD,
+        coords.y * SIZE_FIELD_WORLD,
+        SIZE_FIELD_WORLD,
+        SIZE_FIELD_WORLD
       );
     });
   }
@@ -53,10 +54,10 @@ export default class CanvasScreen {
 
   _clearDisplay() {
     this._display.ctx.clearRect(
-        0,
-        0,
-        this._display.size.width,
-        this._display.size.height
+      0,
+      0,
+      this._display.size.width,
+      this._display.size.height
     );
   }
 
