@@ -1,4 +1,4 @@
-import BusEvents from './bus-events'
+import BusEvents from '../bus-events/bus-events'
 
 export default interface IItem {
   busEvents: BusEvents

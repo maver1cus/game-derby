@@ -1,6 +1,6 @@
-import Item from './engine/item'
-import Car from './engine/car'
-import BusEvents from "./engine/bus-events";
+import Item from './engine/item/item'
+import Car from './engine/car/car'
+import BusEvents from "./engine/bus-events/bus-events";
 
 export type Config = {
   elements: {

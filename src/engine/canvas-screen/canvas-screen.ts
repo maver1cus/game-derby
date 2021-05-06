@@ -1,7 +1,7 @@
 // @ts-nocheck
-import Car from './car';
-import {SIZE_FIELD_WORLD} from '../const';
-import Item from './item';
+import Car from '../car/car';
+import {SIZE_FIELD_WORLD} from '../../const';
+import Item from '../item/item';
 
 const COLORS = new Map([
   [Item, '#000'],

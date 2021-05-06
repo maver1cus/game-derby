@@ -1,6 +1,6 @@
 // @ts-nocheck
-import Car from './car';
-import Item from './item';
+import Car from '../car/car';
+import Item from '../item/item';
 
 const SYMBOLS = new Map([
   [Item, '+'],

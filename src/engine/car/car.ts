@@ -1,7 +1,7 @@
 // @ts-nocheck
-import {getRandomItemFromArray} from '../utils';
-import {Directions} from '../const';
-import Item from './item';
+import {getRandomItemFromArray} from '../../utils';
+import {Directions} from '../../const';
+import Item from '../item/item';
 
 export default class Car extends Item {
   constructor(speed, life, valueDamageToCrash, directionRide, busEvents) {

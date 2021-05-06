@@ -1,7 +1,7 @@
-import Game from './src/engine/game';
-import Car from './src/engine/car';
-import Item from './src/engine/item';
-import BusEvents from './src/engine/bus-events';
+import Game from './src/engine/game/game';
+import Car from './src/engine/car/car';
+import Item from './src/engine/item/item';
+import BusEvents from './src/engine/bus-events/bus-events';
 import {isBrowser} from './src/utils';
 import {Config} from './src/types';
 
@@ -10,6 +10,8 @@ const busEvents = new BusEvents();
 const rootElement = isBrowser()
   ? document.getElementById('root')
   : null;
+
+console.log(11, busEvents);
 
 const config:Config = {
   elements: [
@@ -38,7 +40,6 @@ const config:Config = {
   busEvents,
   rootElement
 };
-
 
 const game = Game.create(config);
 

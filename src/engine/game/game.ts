@@ -1,8 +1,8 @@
 // @ts-nocheck
-import World from './world';
-import CanvasScreen from './canvas-screen';
-import ConsoleScreen from './console-screen';
-import {isBrowser} from '../utils';
+import World from '../world/world';
+import CanvasScreen from '../canvas-screen/canvas-screen';
+import ConsoleScreen from '../console-screen/console-screen';
+import {isBrowser} from '../../utils';
 
 export default class Game {
   constructor(config) {
@@ -22,6 +22,7 @@ export default class Game {
   }
 
   static create(config) {
+    console.log(config)
     return new Game(config);
   }
 }

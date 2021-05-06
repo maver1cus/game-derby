@@ -1,6 +1,6 @@
 // @ts-nocheck
-import {Directions} from '../const';
-import BusEvents from './bus-events';
+import {Directions} from '../../const';
+import BusEvents from '../bus-events/bus-events';
 
 export default class World {
   constructor(config) {

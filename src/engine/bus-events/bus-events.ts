@@ -1,5 +1,5 @@
 // @ts-nocheck
-import Emitter from './emitter';
+import Emitter from '../emitter/emitter';
 
 export default class BusEvents extends Emitter {
   static get Events() {
