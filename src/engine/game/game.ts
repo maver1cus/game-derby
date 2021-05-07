@@ -2,7 +2,7 @@ import World from '../world/world';
 import CanvasScreen from '../canvas-screen/canvas-screen';
 import ConsoleScreen from '../console-screen/console-screen';
 import {isBrowser} from '../../utils';
-import {Config} from "../../types";
+import {Config} from '../../types';
 
 export default class Game {
   private readonly world: World

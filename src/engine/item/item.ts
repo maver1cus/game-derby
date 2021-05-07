@@ -1,7 +1,7 @@
 import BusEvents from '../bus-events/bus-events';
-import IItem from "./item.inteface";
+import IItem from './item.inteface';
 
-export default class Item implements IItem{
+export default class Item implements IItem {
   private life: number;
   readonly valueDamageToCrash: number;
   busEvents: BusEvents;
@@ -12,13 +12,13 @@ export default class Item implements IItem{
     this.busEvents = busEvents;
   }
 
-  init() {
+  init(): void {
     this.busEvents.subscribe(
-      BusEvents.Events.World.CRASH, this.handleCrash.bind(this)
+        BusEvents.Events.World.CRASH, this.handleCrash.bind(this)
     );
   }
 
-  handleCrash(element: Item, markElement: Item) {
+  handleCrash(element: Item, markElement: Item):void {
     if (element !== this) {
       return;
     }
@@ -35,11 +35,11 @@ export default class Item implements IItem{
     }
   }
 
-  takingDamage(damage: number) {
-    this.life = this.life - damage
+  takingDamage(damage: number):void {
+    this.life = this.life - damage;
   }
 
-  getValueDamageToCrash() {
+  getValueDamageToCrash():number {
     return this.valueDamageToCrash;
   }
 }

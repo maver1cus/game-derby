@@ -1,13 +1,14 @@
-import Item from './engine/item/item'
-import BusEvents from "./engine/bus-events/bus-events";
+import Item from './engine/item/item';
+import BusEvents from './engine/bus-events/bus-events';
 
-export type Elements = {
+export type Element = {
   element: Item
-    coords: {
-      x: number,
-      y: number
+  coords: {
+    x: number,
+    y: number
   }
-}[];
+}
+export type Elements = Element[];
 
 export type WorldSize = {
   width: number,

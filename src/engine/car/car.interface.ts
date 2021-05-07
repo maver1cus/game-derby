@@ -1,5 +1,5 @@
-import IItem from "../item/item.inteface";
-import Item from "../item/item";
+import IItem from '../item/item.inteface';
+import Item from '../item/item';
 
 export default interface ICar extends IItem {
   handleWorldEnd(element: Item): void;

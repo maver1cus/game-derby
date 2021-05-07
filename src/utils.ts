@@ -1,4 +1,4 @@
-export const getRandomInteger = function(a:number = 0, b: number = 1): number {
+export const getRandomInteger = function(a = 0, b = 1): number {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
 
@@ -11,4 +11,10 @@ export const getRandomItemFromArray = function(array: string[]): string {
   return array[randomIndex];
 };
 
-export const isBrowser = () => (typeof window != 'undefined' && window.document);
+export const isBrowser = ():boolean => {
+  if (typeof window != 'undefined' && window.document ) {
+    return true;
+  }
+
+  return false;
+};

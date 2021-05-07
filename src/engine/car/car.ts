@@ -1,36 +1,37 @@
 import {getRandomItemFromArray} from '../../utils';
 import {Directions} from '../../const';
 import ICar from './car.interface';
-import BusEvents from "../bus-events/bus-events";
-import Item from '../item/item'
+import BusEvents from '../bus-events/bus-events';
+import Item from '../item/item';
 
 export default class Car extends Item implements ICar {
-  speed: number;
-  directionRide: string;
+  private speed: number;
+  private directionRide: string;
 
   constructor(life: number, valueDamageToCrash: number, busEvents: BusEvents, speed: number, directionRide: string) {
     super(life, valueDamageToCrash, busEvents);
+
     this.speed = speed;
     this.directionRide = directionRide;
 
     this.init();
   }
 
-  init() {
+  init(): void {
     super.init();
 
     this.busEvents.subscribe(
-      BusEvents.Events.World.END, this.handleWorldEnd.bind(this)
+        BusEvents.Events.World.END, this.handleWorldEnd.bind(this)
     );
   }
 
-  handleCrash(element: Item, element2: Item) {
+  handleCrash(element: Item, element2: Item): void {
     super.handleCrash(element, element2);
 
     this.changeDirection();
   }
 
-  handleWorldEnd(element: Item) {
+  handleWorldEnd(element: Item): void {
     if (element !== this) {
       return;
     }
@@ -38,7 +39,7 @@ export default class Car extends Item implements ICar {
     this.changeDirection();
   }
 
-  getSpeed() {
+  getSpeed(): number {
     return this.speed;
   }
 
@@ -46,15 +47,15 @@ export default class Car extends Item implements ICar {
     return this.directionRide;
   }
 
-  changeDirection() {
+  changeDirection():void {
     const directions = Object
-      .keys(Directions)
-      .filter(direction => direction !== this.getDirectionRide());
+        .keys(Directions)
+        .filter((direction) => direction !== this.getDirectionRide());
 
     this.directionRide = getRandomItemFromArray(directions);
   }
 
-  static getRandomDirection() {
+  static getRandomDirection(): string {
     return getRandomItemFromArray(Object.keys(Directions));
   }
 }

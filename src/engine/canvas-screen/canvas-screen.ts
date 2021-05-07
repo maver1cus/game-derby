@@ -1,9 +1,9 @@
 import Car from '../car/car';
 import {SIZE_FIELD_WORLD} from '../../const';
 import Item from '../item/item';
-import World from "../world/world";
+import World from '../world/world';
 
-const COLORS = new Map<{}, string>();
+const COLORS = new Map<{}, string >();
 
 COLORS.set(Item, '#000');
 COLORS.set(Car, '#fcf');
@@ -18,9 +18,9 @@ export default class CanvasScreen {
       height: number
     }
   }
+
   constructor(world: World, rootElement: HTMLElement) {
     this.world = world;
-
     this.display = {
       canvas: null,
       ctx: null,
@@ -38,10 +38,10 @@ export default class CanvasScreen {
     elements.forEach((coords: {x: number, y: number}, element: Item): void => {
       this.display.ctx.fillStyle = COLORS.get(element.constructor);
       this.display.ctx.fillRect(
-        coords.x * SIZE_FIELD_WORLD,
-        coords.y * SIZE_FIELD_WORLD,
-        SIZE_FIELD_WORLD,
-        SIZE_FIELD_WORLD
+          coords.x * SIZE_FIELD_WORLD,
+          coords.y * SIZE_FIELD_WORLD,
+          SIZE_FIELD_WORLD,
+          SIZE_FIELD_WORLD
       );
     });
   }
@@ -61,12 +61,12 @@ export default class CanvasScreen {
     rootElement.append(this.display.canvas);
   }
 
-  clearDisplay() {
+  clearDisplay(): void {
     this.display.ctx.clearRect(
-      0,
-      0,
-      this.display.size.width,
-      this.display.size.height
+        0,
+        0,
+        this.display.size.width,
+        this.display.size.height
     );
   }
 }
