@@ -103,8 +103,4 @@ export default class World {
         || y > this.size.height - 1)
     );
   }
-
-  static create(config: Config) {
-    return new World(config);
-  }
 }

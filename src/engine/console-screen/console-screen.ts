@@ -51,8 +51,4 @@ export default class ConsoleScreen {
     this.display = this.display
       .map((row:[]) => row.map(() => ' '));
   }
-
-  static create(world: World) {
-    return new ConsoleScreen(world);
-  }
 }

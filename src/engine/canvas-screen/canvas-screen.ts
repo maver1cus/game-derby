@@ -69,8 +69,4 @@ export default class CanvasScreen {
       this.display.size.height
     );
   }
-
-  static create(world: World, rootElement: HTMLElement) {
-    return new CanvasScreen(world, rootElement);
-  }
 }

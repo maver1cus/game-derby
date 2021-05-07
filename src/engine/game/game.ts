@@ -9,10 +9,10 @@ export default class Game {
   private screen: CanvasScreen | ConsoleScreen;
 
   constructor(config: Config) {
-    this.world = World.create(config);
+    this.world = new World(config);
     this.screen = isBrowser()
-      ? CanvasScreen.create(this.world, config.rootElement)
-      : ConsoleScreen.create(this.world);
+      ? new CanvasScreen(this.world, config.rootElement)
+      : new ConsoleScreen(this.world);
   }
 
   start():void {
@@ -22,9 +22,5 @@ export default class Game {
   gameStep():void {
     this.world.recount();
     this.screen.print();
-  }
-
-  static create(config: Config):Game {
-    return new Game(config);
   }
 }
