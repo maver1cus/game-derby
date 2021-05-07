@@ -1,11 +1,8 @@
-// @ts-nocheck
 export const Directions = {
-  LEFT: `left`,
-  RIGHT: `right`,
-  UP: `up`,
-  DOWN: `down`
+  LEFT: 'LEFT',
+  RIGHT: 'RIGHT',
+  UP: 'UP',
+  DOWN: 'DOWN'
 };
 
 export const SIZE_FIELD_WORLD = 30;
-
-export const VALUE_DAMAGE_TO_CRASH = 10;

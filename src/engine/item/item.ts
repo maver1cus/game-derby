@@ -2,14 +2,11 @@ import BusEvents from '../bus-events/bus-events';
 import IItem from "./item.inteface";
 
 export default class Item implements IItem{
-  private speed: number;
   private life: number;
-  private readonly valueDamageToCrash: number;
+  readonly valueDamageToCrash: number;
   busEvents: BusEvents;
 
-  constructor(speed: number, life: number, valueDamageToCrash: number, busEvents: BusEvents) {
-    console.log(speed)
-    this.speed = speed;
+  constructor(life: number, valueDamageToCrash: number, busEvents: BusEvents) {
     this.life = life;
     this.valueDamageToCrash = valueDamageToCrash;
     this.busEvents = busEvents;

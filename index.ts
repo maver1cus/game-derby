@@ -11,28 +11,26 @@ const rootElement = isBrowser()
   ? document.getElementById('root')
   : null;
 
-console.log(11, busEvents);
-
 const config:Config = {
   elements: [
     {
-      element: new Car(1, 50, 5, Car.getRandomDirection(), busEvents),
+      element: new Car(50, 5, busEvents, 1, Car.getRandomDirection()),
       coords: {x: 10, y: 10}
     },
     {
-      element: new Car(1, 50, 5, Car.getRandomDirection(), busEvents),
+      element: new Car(50, 5, busEvents, 1, Car.getRandomDirection()),
       coords: {x: 15, y: 15}
     },
     {
-      element: new Item(0, 100, 10, busEvents),
+      element: new Item( 100, 10, busEvents),
       coords: {x: 9, y: 10}
     },
     {
-      element: new Item(0, 100, 10, busEvents),
+      element: new Item(100, 10, busEvents),
       coords: {x: 11, y: 10}
     },
     {
-      element: new Item(0, 100, 10, busEvents),
+      element: new Item( 100, 10, busEvents),
       coords: {x: 10, y: 9}
     }
   ],

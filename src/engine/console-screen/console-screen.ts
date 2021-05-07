@@ -1,35 +1,38 @@
-// @ts-nocheck
 import Car from '../car/car';
 import Item from '../item/item';
+import World from "../world/world";
 
-const SYMBOLS = new Map([
-  [Item, '+'],
-  [Car, '*']
-]);
+const SYMBOLS = new Map<{}, string>();
+
+SYMBOLS.set(Item, '+');
+SYMBOLS.set(Car, '*');
 
 export default class ConsoleScreen {
-  constructor(world) {
-    this._world = world;
-    this._display = null;
+  world: World;
+  display: string[][]
 
-    this._createDisplay();
+  constructor(world: World) {
+    this.world = world;
+    this.display = [];
+
+    this.createDisplay();
   }
 
   print() {
-    const worldSize = this._world.getSize();
+    const worldSize = this.world.getSize();
     this._clearDisplay();
 
-    const elements = this._world.getElements();
+    const elements = this.world.getElements();
 
-    elements.forEach((coords, element) => {
+    elements.forEach((coords: {x: number, y: number}, element: Item) => {
       const {x, y} = coords;
-      this._display[y][x] = SYMBOLS.get(element.constructor);
+      this.display[y][x] = SYMBOLS.get(element.constructor);
     });
 
     console.log(Array(worldSize.width + 1).fill(`-`).join(` `));
     console.log(
-      this._display
-        .map((row) => `|` + row.join(` `) + `|`)
+      this.display
+        .map((row:[]) => `|` + row.join(` `) + `|`)
         .join(`\n`)
     );
 
@@ -37,19 +40,19 @@ export default class ConsoleScreen {
     console.log('');
   }
 
-  _createDisplay() {
-    const {width, height} = this._world.getSize();
+  private createDisplay() {
+    const {width, height} = this.world.getSize();
 
-    this._display = new Array(height).fill([])
+    this.display = new Array(height).fill([])
       .map(() => new Array(width).fill(' '));
   }
 
   _clearDisplay() {
-    this._display = this._display
-      .map((row) => row.map(() => ' '));
+    this.display = this.display
+      .map((row:[]) => row.map(() => ' '));
   }
 
-  static create(world) {
+  static create(world: World) {
     return new ConsoleScreen(world);
   }
 }

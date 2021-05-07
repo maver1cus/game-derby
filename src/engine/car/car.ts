@@ -1,52 +1,60 @@
-// @ts-nocheck
 import {getRandomItemFromArray} from '../../utils';
 import {Directions} from '../../const';
-import Item from '../item/item';
+import ICar from './car.interface';
+import BusEvents from "../bus-events/bus-events";
+import Item from '../item/item'
 
-export default class Car extends Item {
-  constructor(speed, life, valueDamageToCrash, directionRide, busEvents) {
-    super(speed, life, valueDamageToCrash);
-    this._directionRide = directionRide;
-    this._busEvents = busEvents;
+export default class Car extends Item implements ICar {
+  speed: number;
+  directionRide: string;
+
+  constructor(life: number, valueDamageToCrash: number, busEvents: BusEvents, speed: number, directionRide: string) {
+    super(life, valueDamageToCrash, busEvents);
+    this.speed = speed;
+    this.directionRide = directionRide;
 
     this.init();
   }
 
-  _handleCrash(element, element2) {
-    super._handleCrash();
+  init() {
+    super.init();
 
-    this._changeDirection();
+    this.busEvents.subscribe(
+      BusEvents.Events.World.END, this.handleWorldEnd.bind(this)
+    );
   }
 
-  _handleWorldEnd(element) {
+  handleCrash(element: Item, element2: Item) {
+    super.handleCrash(element, element2);
+
+    this.changeDirection();
+  }
+
+  handleWorldEnd(element: Item) {
     if (element !== this) {
       return;
     }
 
-    this._changeDirection();
+    this.changeDirection();
   }
 
   getSpeed() {
-    return this._speed;
+    return this.speed;
   }
 
-  getDirectionRide() {
-    return this._directionRide;
+  getDirectionRide():string {
+    return this.directionRide;
   }
 
-  _changeDirection() {
+  changeDirection() {
     const directions = Object
       .keys(Directions)
-      .filter((direction) => Directions[direction] !== this._directionRide);
+      .filter(direction => direction !== this.getDirectionRide());
 
-    const randomDirection = getRandomItemFromArray(directions);
-
-    this._directionRide = Directions[randomDirection];
+    this.directionRide = getRandomItemFromArray(directions);
   }
 
   static getRandomDirection() {
-    const randomKey = getRandomItemFromArray(Object.keys(Directions));
-
-    return Directions[randomKey];
+    return getRandomItemFromArray(Object.keys(Directions));
   }
 }

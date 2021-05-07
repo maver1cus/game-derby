@@ -1,34 +1,43 @@
-// @ts-nocheck
 import Car from '../car/car';
 import {SIZE_FIELD_WORLD} from '../../const';
 import Item from '../item/item';
+import World from "../world/world";
 
-const COLORS = new Map([
-  [Item, '#000'],
-  [Car, '#fcf']
-]);
+const COLORS = new Map<{}, string>();
+
+COLORS.set(Item, '#000');
+COLORS.set(Car, '#fcf');
 
 export default class CanvasScreen {
-  constructor(world, rootElement) {
-    this._world = world;
+  private world: World
+  private display: {
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    size: {
+      width: number,
+      height: number
+    }
+  }
+  constructor(world: World, rootElement: HTMLElement) {
+    this.world = world;
 
-    this._display = {
+    this.display = {
       canvas: null,
       ctx: null,
       size: null
     };
 
-    this._createDisplay(rootElement);
+    this.createDisplay(rootElement);
   }
 
-  print() {
-    const elements = this._world.getElements();
+  print(): void {
+    const elements = this.world.getElements();
 
-    this._clearDisplay();
+    this.clearDisplay();
 
-    elements.forEach((coords, element) => {
-      this._display.ctx.fillStyle = COLORS.get(element.constructor);
-      this._display.ctx.fillRect(
+    elements.forEach((coords: {x: number, y: number}, element: Item): void => {
+      this.display.ctx.fillStyle = COLORS.get(element.constructor);
+      this.display.ctx.fillRect(
         coords.x * SIZE_FIELD_WORLD,
         coords.y * SIZE_FIELD_WORLD,
         SIZE_FIELD_WORLD,
@@ -37,31 +46,31 @@ export default class CanvasScreen {
     });
   }
 
-  _createDisplay(rootElement) {
-    this._display.canvas = document.createElement('canvas');
-    this._display.ctx = this._display.canvas.getContext('2d');
+  private createDisplay(rootElement: HTMLElement): void {
+    this.display.canvas = document.createElement('canvas');
+    this.display.ctx = this.display.canvas.getContext('2d');
 
-    this._display.size = {
-      width: this._world.getSize().width * SIZE_FIELD_WORLD,
-      height: this._world.getSize().height * SIZE_FIELD_WORLD
+    this.display.size = {
+      width: this.world.getSize().width * SIZE_FIELD_WORLD,
+      height: this.world.getSize().height * SIZE_FIELD_WORLD
     };
 
-    this._display.canvas.width = this._display.size.width;
-    this._display.canvas.height = this._display.size.height;
+    this.display.canvas.width = this.display.size.width;
+    this.display.canvas.height = this.display.size.height;
 
-    rootElement.append(this._display.canvas);
+    rootElement.append(this.display.canvas);
   }
 
-  _clearDisplay() {
-    this._display.ctx.clearRect(
+  clearDisplay() {
+    this.display.ctx.clearRect(
       0,
       0,
-      this._display.size.width,
-      this._display.size.height
+      this.display.size.width,
+      this.display.size.height
     );
   }
 
-  static create(world, rootElement) {
+  static create(world: World, rootElement: HTMLElement) {
     return new CanvasScreen(world, rootElement);
   }
 }
