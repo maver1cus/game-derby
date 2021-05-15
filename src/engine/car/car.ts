@@ -1,14 +1,19 @@
 import {getRandomItemFromArray} from '../../utils';
 import {Directions} from '../../const';
-import ICar from './car.interface';
+import IItem from '../item/item.inteface';
 import BusEvents from '../bus-events/bus-events';
 import Item from '../item/item';
 
-export default class Car extends Item implements ICar {
-  private speed: number;
+export default class Car extends Item implements IItem {
+  private readonly speed: number;
   private directionRide: string;
 
-  constructor(life: number, valueDamageToCrash: number, busEvents: BusEvents, speed: number, directionRide: string) {
+  constructor(
+      life: number,
+      valueDamageToCrash: number,
+      busEvents: BusEvents,
+      speed:number,
+      directionRide: string) {
     super(life, valueDamageToCrash, busEvents);
 
     this.speed = speed;
