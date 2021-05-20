@@ -10,7 +10,8 @@
     "require-jsdoc": "off",
     "operator-linebreak": "off",
     "comma-dangle": "off",
-    "no-multiple-empty-lines": [1, {"max": 1 }]
+    "no-multiple-empty-lines": [1, {"max": 1 }],
+    "semi": "off"
   },
   "extends": [
     "eslint:recommended",

@@ -1,29 +1,32 @@
+import {SimpleFunction} from '../../types';
+
 export default class Emitter {
-  listeners: { [key: string]: Function[] }
+  listeners: { [key: string]: ((...args: unknown[]) => void)[] }
 
   constructor() {
     this.listeners = {};
   }
 
-  emit(event:string, ...args:any): boolean {
+  emit(event:string, ...args: unknown[]): boolean {
     if (!Array.isArray(this.listeners[event])) {
       return false;
     }
 
-    this.listeners[event].forEach((listener: Function) => {
+    this.listeners[event].forEach((listener) => {
       listener(...args);
     });
 
     return true;
   }
 
-  subscribe(event:string, fn:Function) {
+  subscribe(event:string, fn: SimpleFunction): SimpleFunction {
     this.listeners[event] = this.listeners[event] || [];
     this.listeners[event].push(fn);
 
     return () => {
       this.listeners[event] = this.listeners[event]
-        .filter((listener: Function) => listener !== fn);
+          .filter((listener) => listener !== fn);
     };
   }
 }
+

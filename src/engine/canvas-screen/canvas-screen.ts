@@ -1,15 +1,17 @@
 import Car from '../car/car';
 import {SIZE_FIELD_WORLD} from '../../const';
-import Item from '../item/item';
 import World from '../world/world';
+import Item from '../item/item';
+import IScreen from '../console-screen/screen.interface';
+import {SimpleMap} from '../../types';
 
-const COLORS = new Map<{}, string >();
+const COLORS: SimpleMap = new Map();
 
 COLORS.set(Item, '#000');
 COLORS.set(Car, '#fcf');
 
-export default class CanvasScreen {
-  private world: World
+export default class CanvasScreen implements IScreen {
+  private world: World;
   private display: {
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
@@ -30,7 +32,7 @@ export default class CanvasScreen {
     this.createDisplay(rootElement);
   }
 
-  print(): void {
+  public print(): void {
     const elements = this.world.getElements();
 
     this.clearDisplay();
@@ -61,7 +63,7 @@ export default class CanvasScreen {
     rootElement.append(this.display.canvas);
   }
 
-  clearDisplay(): void {
+  private clearDisplay(): void {
     this.display.ctx.clearRect(
         0,
         0,

@@ -3,11 +3,12 @@ import BusEvents from '../bus-events/bus-events';
 import {Config, Elements, WorldSize} from '../../types';
 import Item from '../item/item';
 import Car from '../car/car';
+import IItem from '../item/item.inteface';
 
 export default class World {
-  size: WorldSize;
-  elements: Map<{}, { x: number, y: number }>;
-  busEvents: BusEvents;
+  private readonly size: WorldSize;
+  private readonly elements: Map<IItem, { x: number, y: number }>;
+  private busEvents: BusEvents;
 
   constructor(config: Config) {
     this.size = config.worldSize;
@@ -31,7 +32,7 @@ export default class World {
     this.elements.delete(element);
   }
 
-  recount() {
+  recount(): void {
     this.elements.forEach((coords, element: Item) => {
       if (element instanceof Car) {
         if (element.getSpeed) {
@@ -72,15 +73,15 @@ export default class World {
     });
   }
 
-  getElements() {
+  getElements(): Map<IItem, { x: number, y: number }> {
     return this.elements;
   }
 
-  getSize() {
+  getSize(): WorldSize {
     return this.size;
   }
 
-  private getElementToCoords({x, y}: {x: number, y: number}):any {
+  private getElementToCoords({x, y}: {x: number, y: number}): IItem {
     let markElement = null;
 
     this.elements.forEach((coords, element) => {

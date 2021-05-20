@@ -1,15 +1,17 @@
 import Car from '../car/car';
 import Item from '../item/item';
 import World from '../world/world';
+import IScreen from './screen.interface';
+import {SimpleMap} from '../../types';
 
-const SYMBOLS = new Map<{}, string>();
+const SYMBOLS: SimpleMap = new Map();
 
 SYMBOLS.set(Item, '+');
 SYMBOLS.set(Car, '*');
 
-export default class ConsoleScreen {
-  world: World;
-  display: string[][]
+export default class ConsoleScreen implements IScreen {
+  private world: World;
+  private display: string[][]
 
   constructor(world: World) {
     this.world = world;
@@ -18,7 +20,7 @@ export default class ConsoleScreen {
     this.createDisplay();
   }
 
-  print() {
+  public print(): void {
     const worldSize = this.world.getSize();
     this.clearDisplay();
 

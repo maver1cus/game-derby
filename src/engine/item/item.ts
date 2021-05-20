@@ -35,11 +35,12 @@ export default class Item implements IItem {
     }
   }
 
-  takingDamage(damage: number):void {
+  private takingDamage(damage: number):void {
     this.life = this.life - damage;
   }
 
-  getValueDamageToCrash():number {
+  public getValueDamageToCrash():number {
     return this.valueDamageToCrash;
   }
 }
+

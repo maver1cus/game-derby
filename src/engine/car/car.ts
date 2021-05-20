@@ -13,7 +13,8 @@ export default class Car extends Item implements IItem {
       valueDamageToCrash: number,
       busEvents: BusEvents,
       speed:number,
-      directionRide: string) {
+      directionRide: string
+  ) {
     super(life, valueDamageToCrash, busEvents);
 
     this.speed = speed;
@@ -30,8 +31,8 @@ export default class Car extends Item implements IItem {
     );
   }
 
-  handleCrash(element: Item, element2: Item): void {
-    super.handleCrash(element, element2);
+  handleCrash(elementFirst: Item, elementSecond: Item): void {
+    super.handleCrash(elementFirst, elementSecond);
 
     this.changeDirection();
   }
@@ -44,15 +45,15 @@ export default class Car extends Item implements IItem {
     this.changeDirection();
   }
 
-  getSpeed(): number {
+  public getSpeed(): number {
     return this.speed;
   }
 
-  getDirectionRide():string {
+  public getDirectionRide():string {
     return this.directionRide;
   }
 
-  changeDirection():void {
+  private changeDirection():void {
     const directions = Object
         .keys(Directions)
         .filter((direction) => direction !== this.getDirectionRide());

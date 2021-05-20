@@ -3,6 +3,7 @@ import CanvasScreen from '../canvas-screen/canvas-screen';
 import ConsoleScreen from '../console-screen/console-screen';
 import {isBrowser} from '../../utils';
 import {Config} from '../../types';
+import {DURATION_STEP_GAME} from '../../const';
 
 export default class Game {
   private readonly world: World
@@ -15,11 +16,11 @@ export default class Game {
       : new ConsoleScreen(this.world);
   }
 
-  start():void {
-    setInterval(this.gameStep.bind(this), 1000);
+  start(): void {
+    setInterval(this.gameStep.bind(this), DURATION_STEP_GAME);
   }
 
-  gameStep():void {
+  gameStep(): void {
     this.world.recount();
     this.screen.print();
   }

@@ -1,8 +1,8 @@
-import Item from './engine/item/item';
+import IItem from './engine/item/item.inteface';
 import BusEvents from './engine/bus-events/bus-events';
 
 export type Element = {
-  element: Item
+  element: IItem
   coords: {
     x: number,
     y: number
@@ -21,3 +21,7 @@ export type Config = {
   busEvents: BusEvents,
   rootElement: HTMLElement
 }
+
+export type SimpleFunction = () => void
+
+export type SimpleMap = Map<unknown, string>;

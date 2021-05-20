@@ -6,3 +6,5 @@ export const Directions = {
 };
 
 export const SIZE_FIELD_WORLD = 30;
+
+export const DURATION_STEP_GAME = 1000;
