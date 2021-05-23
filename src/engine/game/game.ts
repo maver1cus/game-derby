@@ -1,19 +1,16 @@
 import World from '../world/world';
-import CanvasScreen from '../canvas-screen/canvas-screen';
-import ConsoleScreen from '../console-screen/console-screen';
-import {isBrowser} from '../../utils';
+import {createScreen} from '../../utils';
 import {Config} from '../../types';
 import {DURATION_STEP_GAME} from '../../const';
+import IScreen from '../console-screen/screen.interface';
 
 export default class Game {
   private readonly world: World
-  private screen: CanvasScreen | ConsoleScreen;
+  private screen: IScreen;
 
   constructor(config: Config) {
     this.world = new World(config);
-    this.screen = isBrowser()
-      ? new CanvasScreen(this.world, config.rootElement)
-      : new ConsoleScreen(this.world);
+    this.screen = createScreen(this.world, config);
   }
 
   start(): void {
