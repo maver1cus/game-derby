@@ -1,9 +1,13 @@
+import {SimpleFunction} from '../../types';
+
 export default class Emitter {
+  listeners: { [key: string]: ((...args: unknown[]) => void)[] }
+
   constructor() {
     this.listeners = {};
   }
 
-  emit(event, ...args) {
+  emit(event:string, ...args: unknown[]): boolean {
     if (!Array.isArray(this.listeners[event])) {
       return false;
     }
@@ -15,7 +19,7 @@ export default class Emitter {
     return true;
   }
 
-  subscribe(event, fn) {
+  subscribe(event:string, fn: SimpleFunction): SimpleFunction {
     this.listeners[event] = this.listeners[event] || [];
     this.listeners[event].push(fn);
 
@@ -25,3 +29,4 @@ export default class Emitter {
     };
   }
 }
+
