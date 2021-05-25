@@ -1,11 +1,11 @@
-import Car from '../car/car';
 import {SIZE_FIELD_WORLD} from '../../const';
 import World from '../world/world';
 import Item from '../item/item';
 import IScreen from '../console-screen/screen.interface';
+import Car from '../car/car';
 import {SimpleMap} from '../../types';
 
-const COLORS: SimpleMap = new Map();
+const COLORS:SimpleMap = new Map();
 
 COLORS.set(Item, '#000');
 COLORS.set(Car, '#fcf');

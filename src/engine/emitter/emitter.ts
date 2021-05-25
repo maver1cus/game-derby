@@ -1,4 +1,4 @@
-import {SimpleFunction} from '../../types';
+type SimpleFunction = () => void;
 
 export default class Emitter {
   listeners: { [key: string]: ((...args: unknown[]) => void)[] }

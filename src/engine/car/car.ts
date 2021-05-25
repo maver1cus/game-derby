@@ -1,4 +1,4 @@
-import {getRandomItemFromArray} from '../../utils';
+import {getRandomItemFromArray} from '../../utils/common';
 import {Directions} from '../../const';
 import IItem from '../item/item.inteface';
 import BusEvents from '../bus-events/bus-events';

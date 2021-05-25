@@ -1,5 +1,5 @@
 import BusEvents from './engine/bus-events/bus-events';
-import {isBrowser} from './utils';
+import {isBrowser} from './utils/common';
 import {Config} from './types';
 import Car from './engine/car/car';
 import Item from './engine/item/item';
