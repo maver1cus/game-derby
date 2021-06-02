@@ -5,6 +5,4 @@ export default interface IItem {
   init():void;
   handleCrash(element: IItem, markElement: IItem): void;
   getValueDamageToCrash(): number;
-  getSpeed?(): number;
-  getDirectionRide?(): string;
 }
