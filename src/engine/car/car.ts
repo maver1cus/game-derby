@@ -1,10 +1,10 @@
 import {getRandomItemFromArray} from '../../utils/common';
 import {Directions} from '../../const';
-import IItem from '../item/item.inteface';
 import BusEvents from '../bus-events/bus-events';
 import Item from '../item/item';
+import ICar from './car.interface';
 
-export default class Car extends Item implements IItem {
+export default class Car extends Item implements ICar {
   private readonly speed: number;
   private directionRide: string;
 
