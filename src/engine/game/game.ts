@@ -1,5 +1,5 @@
 import World from '../world/world';
-import {createScreen} from '../../utils/createScreen';
+import {createScreen} from '../../utils/screen-factory';
 import {Config} from '../../types';
 import {DURATION_STEP_GAME} from '../../const';
 import IScreen from '../console-screen/screen.interface';
