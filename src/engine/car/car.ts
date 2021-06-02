@@ -3,22 +3,26 @@ import {Directions} from '../../const';
 import BusEvents from '../bus-events/bus-events';
 import Item from '../item/item';
 import ICar from './car.interface';
+import IPlayer from '../player/player.interface';
 
 export default class Car extends Item implements ICar {
   private readonly speed: number;
   private directionRide: string;
+  private player: IPlayer;
 
   constructor(
       life: number,
       valueDamageToCrash: number,
       busEvents: BusEvents,
       speed: number,
-      directionRide: string
+      directionRide: string,
+      player: IPlayer
   ) {
     super(life, valueDamageToCrash, busEvents);
 
     this.speed = speed;
     this.directionRide = directionRide;
+    this.player = player;
 
     this.init();
   }
