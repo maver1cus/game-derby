@@ -1,9 +1,10 @@
 import {Directions} from '../../const';
 import BusEvents from '../bus-events/bus-events';
-import {Config, Elements, WorldSize} from '../../types';
+import {Config, Coords, Elements, WorldSize} from '../../types';
 import Item from '../item/item';
-import Car from '../car/car';
 import IItem from '../item/item.inteface';
+import Car from '../car/car';
+import ICar from '../car/car.interface';
 
 export default class World {
   private readonly size: WorldSize;
@@ -33,43 +34,42 @@ export default class World {
   }
 
   recount(): void {
-    this.elements.forEach((coords, element: Item) => {
-      if (element instanceof Car) {
-        if (element.getSpeed) {
-          const speed = element.getSpeed();
-          const direction = element.getDirectionRide();
-          const candidateCoords = {x: coords.x, y: coords.y};
+    const cars = this.getCars();
 
-          switch (direction) {
-            case Directions.LEFT:
-              candidateCoords.x = candidateCoords.x - speed;
-              break;
-            case Directions.RIGHT:
-              candidateCoords.x = candidateCoords.x + speed;
-              break;
-            case Directions.UP:
-              candidateCoords.y = candidateCoords.y - speed;
-              break;
-            case Directions.DOWN:
-              candidateCoords.y = candidateCoords.y + speed;
-              break;
-          }
+    cars.forEach((element: ICar) => {
+      const speed = element.getSpeed();
+      const direction = element.getDirectionRide();
 
-          if (!this.isValidCoords(candidateCoords)) {
-            this.busEvents.emit(BusEvents.Events.World.END, element);
-            return;
-          }
+      const candidateCoords = this.getCoordsToElement(element);
 
-          const markElement = this.getElementToCoords(candidateCoords);
-
-          if (markElement) {
-            this.
-                busEvents
-                .emit(BusEvents.Events.World.CRASH, element, markElement);
-          }
-          this.elements.set(element, candidateCoords);
-        }
+      switch (direction) {
+        case Directions.LEFT:
+          candidateCoords.x = candidateCoords.x - speed;
+          break;
+        case Directions.RIGHT:
+          candidateCoords.x = candidateCoords.x + speed;
+          break;
+        case Directions.UP:
+          candidateCoords.y = candidateCoords.y - speed;
+          break;
+        case Directions.DOWN:
+          candidateCoords.y = candidateCoords.y + speed;
+          break;
       }
+
+      if (!this.isValidCoords(candidateCoords)) {
+        this.busEvents.emit(BusEvents.Events.World.END, element);
+        return;
+      }
+
+      const markElement = this.getElementToCoords(candidateCoords);
+
+      if (markElement) {
+        this.
+            busEvents
+            .emit(BusEvents.Events.World.CRASH, element, markElement);
+      }
+      this.elements.set(element, candidateCoords);
     });
   }
 
@@ -81,7 +81,12 @@ export default class World {
     return this.size;
   }
 
-  private getElementToCoords({x, y}: {x: number, y: number}): IItem {
+  private getCars(): IItem[] {
+    return Array.from(this.elements.keys())
+        .filter((element) => element instanceof Car)
+  }
+
+  private getElementToCoords({x, y}: Coords): IItem {
     let markElement = null;
 
     this.elements.forEach((coords, element) => {
@@ -91,6 +96,10 @@ export default class World {
     });
 
     return markElement;
+  }
+
+  private getCoordsToElement(element: IItem): Coords {
+    return this.elements.get(element)
   }
 
   private isValidCoords({x, y}: {x: number, y: number}): boolean {

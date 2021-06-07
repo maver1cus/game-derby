@@ -1,12 +1,14 @@
 import IItem from './engine/item/item.inteface';
-import BusEvents from './engine/bus-events/bus-events';
+import Emitter from './engine/emitter/emitter';
+
+export type Coords = {
+  x: number,
+  y: number
+}
 
 export type Element = {
   element: IItem
-  coords: {
-    x: number,
-    y: number
-  }
+  coords: Coords
 }
 export type Elements = Element[];
 
@@ -18,10 +20,8 @@ export type WorldSize = {
 export type Config = {
   elements: Elements,
   worldSize: WorldSize,
-  busEvents: BusEvents,
+  busEvents: Emitter,
   rootElement: HTMLElement
 }
-
-export type SimpleFunction = () => void
 
 export type SimpleMap = Map<unknown, string>;
