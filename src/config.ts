@@ -4,6 +4,8 @@ import {Config} from './types';
 import Car from './engine/car/car';
 import Item from './engine/item/item';
 import {createCar} from './utils/car-factory';
+import Manipulator from './engine/manipulator/manipulator';
+import {Actions, Directions} from './const';
 
 const busEvents = new BusEvents();
 
@@ -14,11 +16,64 @@ const rootElement = isBrowser()
 export const config: Config = {
   elements: [
     {
-      element: createCar(50, 5, busEvents, 1, Car.getRandomDirection()),
+      element: createCar(
+          50,
+          5, busEvents,
+          1,
+          Car.getRandomDirection(),
+          new Manipulator({
+            'ArrowLeft': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.LEFT
+            },
+            'ArrowRight': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.RIGHT
+            },
+            'ArrowUp': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.UP
+            },
+            'ArrowDown': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.DOWN
+            },
+            'Space': {
+              action: Actions.STOP,
+              payload: ''
+            }
+          })),
       coords: {x: 10, y: 10}
     },
     {
-      element: createCar(50, 5, busEvents, 1, Car.getRandomDirection()),
+      element: createCar(
+          50,
+          5,
+          busEvents,
+          1,
+          Car.getRandomDirection(),
+          new Manipulator({
+            'KeyA': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.LEFT
+            },
+            'KeyD': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.RIGHT
+            },
+            'KeyW': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.UP
+            },
+            'KeyS': {
+              action: Actions.CHANGE_DIRECTION,
+              payload: Directions.DOWN
+            },
+            'KeyR': {
+              action: Actions.STOP,
+              payload: ''
+            }
+          })),
       coords: {x: 15, y: 15}
     },
     {

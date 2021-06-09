@@ -2,7 +2,7 @@ import BusEvents from '../bus-events/bus-events';
 import IItem from './item.inteface';
 
 export default class Item implements IItem {
-  private life: number;
+  life: number;
   readonly valueDamageToCrash: number;
   busEvents: BusEvents;
 

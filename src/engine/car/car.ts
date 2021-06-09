@@ -6,7 +6,7 @@ import ICar from './car.interface';
 import IPlayer from '../player/player.interface';
 
 export default class Car extends Item implements ICar {
-  private readonly speed: number;
+  private speed: number;
   private directionRide: string;
   private player: IPlayer;
 
@@ -37,8 +37,6 @@ export default class Car extends Item implements ICar {
 
   handleCrash(elementFirst: Item, elementSecond: Item): void {
     super.handleCrash(elementFirst, elementSecond);
-
-    this.changeDirection();
   }
 
   handleWorldEnd(element: Item): void {
@@ -46,7 +44,7 @@ export default class Car extends Item implements ICar {
       return;
     }
 
-    this.changeDirection();
+    this.stopCar();
   }
 
   public getSpeed(): number {
@@ -57,12 +55,12 @@ export default class Car extends Item implements ICar {
     return this.directionRide;
   }
 
-  private changeDirection(): void {
-    const directions = Object
-        .keys(Directions)
-        .filter((direction) => direction !== this.getDirectionRide());
+  public changeDirection(direction: string): void {
+    this.directionRide = direction;
+  }
 
-    this.directionRide = getRandomItemFromArray(directions);
+  public stopCar(): void {
+    this.speed = 0;
   }
 
   static getRandomDirection(): string {

@@ -1,5 +1,6 @@
 import IItem from './engine/item/item.inteface';
 import Emitter from './engine/emitter/emitter';
+import {Actions} from './const';
 
 export type Coords = {
   x: number,
@@ -25,3 +26,9 @@ export type Config = {
 }
 
 export type SimpleMap = Map<unknown, string>;
+
+export type OptionsManipulator = {[key: string]: {
+    action: Actions,
+    payload: string
+  }
+}
