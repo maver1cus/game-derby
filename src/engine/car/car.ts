@@ -27,26 +27,6 @@ export default class Car extends Item implements ICar {
     this.init();
   }
 
-  init(): void {
-    super.init();
-
-    this.busEvents.subscribe(
-        BusEvents.Events.World.END, this.handleWorldEnd.bind(this)
-    );
-  }
-
-  handleCrash(elementFirst: Item, elementSecond: Item): void {
-    super.handleCrash(elementFirst, elementSecond);
-  }
-
-  handleWorldEnd(element: Item): void {
-    if (element !== this) {
-      return;
-    }
-
-    this.stopCar();
-  }
-
   public getSpeed(): number {
     return this.speed;
   }
