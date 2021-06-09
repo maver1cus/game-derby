@@ -99,7 +99,12 @@ export default class World {
   }
 
   private getCoordsToElement(element: IItem): Coords {
-    return this.elements.get(element)
+    const coords = this.elements.get(element);
+
+    return {
+      x: coords.x,
+      y: coords.y
+    }
   }
 
   private isValidCoords({x, y}: {x: number, y: number}): boolean {
