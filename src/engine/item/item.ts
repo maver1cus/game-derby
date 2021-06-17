@@ -26,11 +26,11 @@ export default class Item implements IItem {
     element.takingDamage(markElement.getValueDamageToCrash());
     markElement.takingDamage(element.getValueDamageToCrash());
 
-    if (element.life < 0) {
+    if (element.life <= 0) {
       this.busEvents.emit(BusEvents.Events.Item.DESTROY, element);
     }
 
-    if (markElement.life < 0) {
+    if (markElement.life <= 0) {
       this.busEvents.emit(BusEvents.Events.Item.DESTROY, markElement);
     }
   }

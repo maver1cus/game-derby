@@ -61,15 +61,15 @@ export default class World {
         this.busEvents.emit(BusEvents.Events.World.END, element);
         return;
       }
-
       const markElement = this.getElementToCoords(candidateCoords);
 
+      this.elements.set(element, candidateCoords);
+
       if (markElement) {
-        this.
-            busEvents
+        this
+            .busEvents
             .emit(BusEvents.Events.World.CRASH, element, markElement);
       }
-      this.elements.set(element, candidateCoords);
     });
   }
 
