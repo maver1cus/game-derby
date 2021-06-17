@@ -8,6 +8,7 @@ export default class Manipulator implements IManipulator {
 
   constructor(options: OptionsManipulator) {
     this.options = options;
+    this.player = null;
   }
 
   init(player: IPlayer): void {

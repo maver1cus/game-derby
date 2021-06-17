@@ -6,6 +6,7 @@ import Item from './engine/item/item';
 import {createCar} from './utils/car-factory';
 import Manipulator from './engine/manipulator/manipulator';
 import {Actions, Directions} from './const';
+import ManipulatorMouse from './engine/manipulator-mouse/manipulator-mouse';
 
 const busEvents = new BusEvents();
 
@@ -52,28 +53,8 @@ export const config: Config = {
           busEvents,
           1,
           Car.getRandomDirection(),
-          new Manipulator({
-            'KeyA': {
-              action: Actions.CHANGE_DIRECTION,
-              payload: Directions.LEFT
-            },
-            'KeyD': {
-              action: Actions.CHANGE_DIRECTION,
-              payload: Directions.RIGHT
-            },
-            'KeyW': {
-              action: Actions.CHANGE_DIRECTION,
-              payload: Directions.UP
-            },
-            'KeyS': {
-              action: Actions.CHANGE_DIRECTION,
-              payload: Directions.DOWN
-            },
-            'KeyR': {
-              action: Actions.STOP,
-              payload: ''
-            }
-          })),
+          new ManipulatorMouse()
+      ),
       coords: {x: 15, y: 15}
     },
     {
