@@ -26,7 +26,7 @@ export default class Item implements IItem {
     element.takingDamage(markElement.getValueDamageToCrash());
     markElement.takingDamage(element.getValueDamageToCrash());
 
-    if (element.life <= 0) {
+    if (this.life <= 0) {
       this.busEvents.emit(BusEvents.Events.Item.DESTROY, element);
     }
 
