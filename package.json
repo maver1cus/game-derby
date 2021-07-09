@@ -23,7 +23,7 @@
   },
   "scripts": {
     "eslint": "eslint --ext .ts src/",
-    "test": "npm run eslint",
+    "test": "jest",
     "build": "webpack --mode development",
     "start": "webpack serve --mode=development"
   },
