@@ -61,15 +61,15 @@ export default class World {
         this.busEvents.emit(BusEvents.Events.World.END, element);
         return;
       }
-
       const markElement = this.getElementToCoords(candidateCoords);
 
+      this.elements.set(element, candidateCoords);
+
       if (markElement) {
-        this.
-            busEvents
+        this
+            .busEvents
             .emit(BusEvents.Events.World.CRASH, element, markElement);
       }
-      this.elements.set(element, candidateCoords);
     });
   }
 
@@ -99,7 +99,12 @@ export default class World {
   }
 
   private getCoordsToElement(element: IItem): Coords {
-    return this.elements.get(element)
+    const coords = this.elements.get(element);
+
+    return {
+      x: coords.x,
+      y: coords.y
+    }
   }
 
   private isValidCoords({x, y}: {x: number, y: number}): boolean {
